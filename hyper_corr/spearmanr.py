@@ -348,13 +348,13 @@ def spearmanr_ties(x_sorted, y_ordered, n, pvals=True):
         Sxy += rx[k] * ry[k]
 
     invn = 1.0 / n
-    num  = Sxy - Sy * Sy * invn
-    denx = Sxx - Sy * Sy * invn
-    deny = Syy - Sy * Sy * invn
-    if denx <= 0.0 or deny <= 0.0:
+    cov = Sxy - Sy * Sy * invn
+    vx  = Sxx - Sy * Sy * invn
+    vy  = Syy - Sy * Sy * invn
+    if vx <= 0.0 or vy <= 0.0:
         return math.nan, math.nan
 
-    rho = num / math.sqrt(denx * deny)
+    rho = cov / math.sqrt(vx * vy)
     if rho >  1.0: rho =  1.0
     if rho < -1.0: rho = -1.0
 
@@ -421,18 +421,18 @@ def spearmanr_noties(x_sorted, y_ordered, n, pvals=True):
     # Sxy = Σ (k+1) * (invperm[k]+1), k iterates in x_sorted order
     Sxy = np.int64(0)
     for k in range(n):
-        Sxy += k* invperm[k]
+        Sxy += k * invperm[k]
     
     Sxy = float(Sxy) + float(n) * float(n)
     
     invn = 1.0 / n
-    num  = Sxy - Sy * Sy * invn
-    denx = Sxx - Sy * Sy * invn
-    deny = Syy - Sy * Sy * invn
-    if denx <= 0.0 or deny <= 0.0:
+    cov = Sxy - Sy * Sy * invn
+    vx  = Sxx - Sy * Sy * invn
+    vy  = Syy - Sy * Sy * invn
+    if vx <= 0.0 or vy <= 0.0:
         return math.nan, math.nan
 
-    rho = num / math.sqrt(denx * deny)
+    rho = cov / math.sqrt(vx * vy)
     if rho >  1.0: rho =  1.0
     if rho < -1.0: rho = -1.0
 
@@ -465,9 +465,9 @@ def _spearmanr_noties_unsorted(x, y, n, pvals=True):
     y_ordered = np.empty(n, np.float64)
     for i in range(n):
         y_ordered[i] = y[idx[i]]
-        
+
     rho, pvalue = spearmanr_noties(x, y_ordered, n, pvals=pvals)
-        
+
     return rho, pvalue
 
 def spearmanr(x, y, pvals=True, ties='auto', sorted_x=False):
@@ -483,20 +483,20 @@ def spearmanr(x, y, pvals=True, ties='auto', sorted_x=False):
     n = x.size
     
     if not sorted_x:
-        if (ties=='auto') or (ties is True):
+        if (ties == 'auto') or (ties is True):
             #Just routing to spearmanr_ties with no ties checking is faster
             #and results in correct answers as well...
             rho, pvalue = _spearmanr_ties_unsorted(x, y, n, pvals=pvals)
-            
+
         else:
             rho, pvalue = _spearmanr_noties_unsorted(x, y, n, pvals=pvals)
-            
+
     else:
-        if (ties=='auto') or (ties is True):
+        if (ties == 'auto') or (ties is True):
             #Just routing to spearmanr_ties with no ties checking is faster
             #and results in correct answers as well...
             rho, pvalue = spearmanr_ties(x, y, n, pvals=pvals)
-    
+
         else:
             rho, pvalue = spearmanr_noties(x, y, n, pvals=pvals)
 

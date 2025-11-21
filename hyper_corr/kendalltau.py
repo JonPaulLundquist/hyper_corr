@@ -667,38 +667,38 @@ def kendalltau(x, y, pvals=True, ties='auto', sorted_x=False):
     n = x.size
     
     if not sorted_x:
-        if ties=='auto':
-            #Just routing to kendalltau_ties with no ties checking for n>300 is 
+        if ties == 'auto':
+            #Just routing to kendalltau_ties with no ties checking for n>300 is
             #faster and results in correct answers as well...
-            
-            if n<=300:
+
+            if n <= 300:
                 idx, x_dups = _has_dups_argsort(x, n, early_exit=False)
                 if x_dups:
                     tau, pvalue = _kendalltau_ties_unsorted(x, y, n, idx=idx, pvals=pvals)
-                    
+
                 else:
                     y_dups = _has_dups_quicksort(y, n)
                     if y_dups:
                         tau, pvalue = _kendalltau_ties_unsorted(x, y, n, idx=idx, pvals=pvals)
-                        
+
                     else:
                         tau, pvalue = _kendalltau_noties_unsorted(x, y, n, idx=idx, pvals=pvals)
-                    
+
             else:
-               tau, pvalue = _kendalltau_ties_unsorted(x, y, n, pvals=pvals)
-                
-        elif ties==False:
+                tau, pvalue = _kendalltau_ties_unsorted(x, y, n, pvals=pvals)
+
+        elif ties is False:
             tau, pvalue = _kendalltau_noties_unsorted(x, y, n, pvals=pvals)
-            
-        elif ties==True:
+
+        elif ties is True:
             tau, pvalue = _kendalltau_ties_unsorted(x, y, n, pvals=pvals)
-            
+
     else:
-        if ties=='auto':
-            #Just routing to kendalltau_ties with no ties checking for n>300 is 
+        if ties == 'auto':
+            #Just routing to kendalltau_ties with no ties checking for n>300 is
             #faster and results in correct answers as well...
-            
-            if n<=300:
+
+            if n <= 300:
                 x_dups = _has_dups_sorted(x, n)
                 if x_dups:
                     tau, pvalue = kendalltau_ties(x, y, n, pvals=pvals)
@@ -713,11 +713,11 @@ def kendalltau(x, y, pvals=True, ties='auto', sorted_x=False):
                     
             else:
                 tau, pvalue = kendalltau_ties(x, y, n, pvals=pvals)
-                
-        elif ties==False:
+
+        elif ties is False:
             tau, pvalue = kendalltau_noties(x, y, n, pvals=pvals)
-            
-        elif ties==True:
+
+        elif ties is True:
             tau, pvalue = kendalltau_ties(x, y, n, pvals=pvals)
 
     #Mirroring scipy output for compatibility. Slows things down slightly.

@@ -445,17 +445,15 @@ def chatterjeexi(x, y, *, pvals=True, ties="auto", sorted_x=False):
         y_ordered = y
 
     if ties == "auto":
-        has_ties = True 
-        
+        has_ties = True
     else:
         has_ties = bool(ties)
-    
+
     if has_ties:
-        tau, pvalue = chatterjeexi_ties(x_sorted, y_ordered, n, pvals=pvals)
-
+        xi, pvalue = chatterjeexi_ties(x_sorted, y_ordered, n, pvals=pvals)
     else:
-        tau, pvalue = chatterjeexi_noties(x_sorted, y_ordered, n, pvals=pvals)
+        xi, pvalue = chatterjeexi_noties(x_sorted, y_ordered, n, pvals=pvals)
 
-    res = SignificanceResult(statistic=float(tau), pvalue=float(pvalue))
+    res = SignificanceResult(statistic=float(xi), pvalue=float(pvalue))
     
     return res
