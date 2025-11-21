@@ -427,16 +427,16 @@ def somersd(x, y, pvals=True, ties='auto', sorted_x=False):
     
     if not sorted_x:
         idx = _argsort(x, n)
-        if (ties=='auto') or (ties is True):
+        if (ties == 'auto') or (ties is True):
             #Just routing to spearmanr_ties with no ties checking is faster
             #and results in correct answers as well...
             D, pvalue, T = _somersd_ties_unsorted(x, y, n, idx=idx, pvals=pvals)
 
         else:
             D, pvalue, T = _somersd_noties_unsorted(x, y, n, idx=idx, pvals=pvals)
-            
+
     else:
-        if (ties=='auto') or (ties is True):
+        if (ties == 'auto') or (ties is True):
             #Just routing to spearmanr_ties with no ties checking is faster
             #and results in correct answers as well...
             D, pvalue, T = somersd_ties(x, y, n, pvals=pvals)
