@@ -148,7 +148,7 @@ def _pearsonr(x, y, pvals=True):
     if r >  1.0: r =  1.0
     if r < -1.0: r = -1.0
 
-     # *** GUARD FOR PERFECT CORRELATION ***
+    # *** GUARD FOR PERFECT CORRELATION ***
     if math.fabs(r) == 1.0:
         # exact linear relationship → infinite t → p = 0
         return r, 0.0
