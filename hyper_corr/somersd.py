@@ -154,31 +154,31 @@ SomersDResult = namedtuple("SomersDResult", ["statistic", "pvalue", "table"])
 from ._utils import _argsort
 
 @njit(cache=True, nogil=True, fastmath=True, inline='always')
-def _group_ids_sorted(a, n):
+def _ranks_sorted(a, n):
 
-    ids = np.empty(n, np.int64)
-    cur = 0
-    ids[0] = cur
+    ranks = np.empty(n, np.int64)
+    r = 0
+    ranks[0] = r
     for t in range(1, n):
         if a[t] != a[t-1]:
-            cur += 1
-        ids[t] = cur
-    return ids, cur + 1                   # (ids, n_unique)
+            r += 1
+        ranks[t] = r
+    return ranks, r + 1                   # (ranks, n_unique)
 
 @njit(cache=True, nogil=True, fastmath=True)
-def _group_ids(a, n):
+def _ranks(a, n):
 
-    ids = np.empty(n, np.int64)
+    ranks = np.empty(n, np.int64)
     idx = _argsort(a, n)
-    cur = 0
-    ids[idx[0]] = cur
+    r = 0
+    ranks[idx[0]] = r
     for t in range(1, n):
         i = idx[t]
         j = idx[t-1]
         if a[i] != a[j]:
-            cur += 1
-        ids[i] = cur
-    return ids, cur + 1                   # (ids, n_unique)
+            r += 1
+        ranks[i] = r
+    return ranks, r + 1                   # (ranks, n_unique)
 
 @njit(cache=True, nogil=True, fastmath=True)
 def _contingency_table(x_sorted, y_ordered, n):
@@ -188,11 +188,11 @@ def _contingency_table(x_sorted, y_ordered, n):
     Returns a 2D int64 array of shape (len(ux), len(uy)).
     """
 
-    ix, nx = _group_ids_sorted(x_sorted, n)
-    iy, ny = _group_ids(y_ordered, n)
+    rx, nx = _ranks_sorted(x_sorted, n)
+    ry, ny = _ranks(y_ordered, n)
     table = np.zeros((nx, ny), np.int64)
     for i in range(n):
-        table[ix[i], iy[i]] += 1
+        table[rx[i], ry[i]] += 1
     return table, nx, ny
 
 @njit(cache=True, nogil=True, fastmath=True, inline='always')
