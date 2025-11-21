@@ -344,14 +344,14 @@ def _kendall_p_exact(n, c):
     return p
 
 @njit(cache=True, nogil=True, fastmath=True, inline='always')
-def _sorted_ranks(segments, x, n):
+def _ranks_sorted(segments, x, n):
     segments[0] = 1  # First element always starts a new segment
     for i in range(1, n):
         segments[i] = segments[i-1] + (x[i] != x[i-1])
     return segments
 
 @njit(cache=True, nogil=True, fastmath=True, inline='always')
-def _ind_ranks(segments, x, ind, n):
+def _ranks_ind(segments, x, ind, n):
     segments[0] = 1  # First element always starts a new segment
     for i in range(1, n):
         segments[i] = segments[i-1] + (x[ind[i]] != x[ind[i-1]])
@@ -537,7 +537,7 @@ def kendalltau_ties(x_sorted, y_ordered, n, pvals=True):
     """
     # x ranks, equal x share the same rank
     segments = np.empty(n, np.int32)
-    x_rank = _sorted_ranks(segments, x_sorted, n)
+    x_rank = _ranks_sorted(segments, x_sorted, n)
 
     x_max  = int(x_rank[-1])
      # y ranks, equal y share the same rank
@@ -575,7 +575,7 @@ def _kendalltau_ties_unsorted(x, y, n, idx=None, pvals=True):
     
     # x ranks, equal x share the same rank
     segments = np.empty(n, np.int32)
-    x_rank = _ind_ranks(segments, x, idx, n)
+    x_rank = _ranks_ind(segments, x, idx, n)
 
     x_max  = int(x_rank[-1])
     # y ranks, equal y share the same rank
