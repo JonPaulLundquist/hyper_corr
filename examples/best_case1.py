@@ -36,4 +36,4 @@ for i in range(N):
     iy = ys[i]
     gind = (abs(ix-xs)<0.005) & (abs(iy-ys)<0.005)
     r = np.hypot(xs[gind] - ix, ys[gind] - iy)
-    tau[i], p[i] = kendalltau_ties(r, zs[gind], np.sum(gind))
+    tau[i], p[i] = kendalltau_ties(zs[gind], r, np.sum(gind))

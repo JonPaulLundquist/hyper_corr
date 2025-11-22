@@ -27,14 +27,14 @@ pvals = np.empty(M, dtype=np.float64)
 
 t0 = time.perf_counter()
 
-ind = np.argsort(y, kind="stable")
-y_sorted = y[ind]; x_ordered = x[ind]   # x in the same order as y
+ind = np.argsort(x, kind="stable")
+x_sorted = x[ind]; y_ordered = y[ind]   # x in the same order as y
     
 ties = ((N-np.unique(x).size)>0) or ((N-np.unique(y).size)>0)
 
 for i in range(M):
-    xw = x_ordered[i:i+W]
-    yw = y_sorted[i:i+W]
+    xw = x_sorted[i:i+W]
+    yw = y_ordered[i:i+W]
     if ties:
         tau, p = kendalltau_ties(xw, yw, W)
     else:

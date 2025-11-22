@@ -58,14 +58,14 @@ def local_kendall_map(Z, dx, dy, win_phys_x, win_phys_y):
             # (mergesort is stable in NumPy/Numba)
             ord_idx = np.argsort(z_buf[:m], kind='mergesort')  # 0..m-1
             z_sorted = np.empty(m, np.float64)
-            r_sorted = np.empty(m, np.float64)
+            r_ordered = np.empty(m, np.float64)
             for k in range(m):
                 idx = ord_idx[k]
                 z_sorted[k] = z_buf[idx]
-                r_sorted[k] = r_buf[idx]
+                r_ordered[k] = r_buf[idx]
 
-            # Kendall tau (ties version; y must be sorted → z_sorted)
-            res = kendalltau_ties(r_sorted, z_sorted, m)
+            # Kendall tau (ties version; x must be sorted → z_sorted)
+            res = kendalltau_ties(z_sorted, r_ordered, m)
             tau_map[iy, ix] = res.statistic
             p_map[iy, ix]   = res.pvalue
 
@@ -82,6 +82,6 @@ R0   = np.hypot(x, y)
 rng  = np.random.default_rng(0)
 z    = np.sin(7.0 * R0) + 0.15 * rng.normal(size=R0.shape)
 
-# choose physical half-window ~0.005 (your previous choice)
+# choose physical half-window ~0.005
 win_phys = 0.005
 tau_map, p_map = local_kendall_map(z, dx, dy, win_phys, win_phys)
