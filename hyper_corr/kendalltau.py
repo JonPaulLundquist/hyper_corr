@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2025 Jon Paul Lundquist
+# Derived and adapted from SciPy's scipy.stats.kendalltau (BSD-3-Clause);
+# see licenses/SciPy_LICENSE.txt for the original license.
 """
 Created on Sun Oct  5 15:33:13 2025
 
