@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hyper_corr"
-version = "0.1.0"
+version = "0.1.1"
 description = "Hyper-Fast Correlation Functions (Numba-Accelerated): Pearson's r, Spearman's rho, Kendall's tau, Chatterjee's xi, Somers’ D"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.8"
