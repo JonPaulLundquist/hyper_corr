@@ -9,7 +9,7 @@ description = "Hyper-Fast Correlation Functions (Numba-Accelerated): Pearson's r
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.8"
 license = "MIT"
-license-files = ["LICENSE*"]
+license-files = ["*LICENSE*"]
 authors = [{ name = "Jon Paul Lundquist" }]
 keywords = ["statistics", "correlation", "ranked", "pearson", "spearman",  "kendall", "chatterjee", "somers", "numba"]
 classifiers = [                                                                                                                                                                      "Programming Language :: Python :: 3",
