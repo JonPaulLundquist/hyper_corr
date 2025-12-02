@@ -100,7 +100,7 @@ for i in range(M):
 Benchmarks and usage experiments live in the `bench/` and `examples/` folders. Packaging metadata is defined in `pyproject.toml`. Contributions should keep the public API exports in `hyper_corr/__init__.py` up to date.
 
 ## Provenance and Licensing
-Several kernels and statistical routines in `hyper_corr` originate from or were adapted from corresponding SciPy implementations. Those upstream sources are distributed under the BSD-3-Clause license, and their terms continue to apply to the derived portions of this project. The BSD-3-Clause obligations coexist with the MIT License that governs the rest of the codebase; using or redistributing `hyper_corr` should account for both license notices. A copy of the SciPy license text bundled with this repository is available at [`licenses/SciPy_LICENSE.txt`](./licenses/SciPy_LICENSE.txt).
+Several kernels and statistical routines in `hyper_corr` originate from or were adapted from corresponding SciPy implementations. Those upstream sources are distributed under the BSD-3-Clause license, and their terms continue to apply to the derived portions of this project. The BSD-3-Clause obligations coexist with the MIT License that governs the rest of the codebase; using or redistributing `hyper_corr` should account for both license notices. Upstream attribution details live in [`THIRD_PARTY_LICENSES.md`](./THIRD_PARTY_LICENSES.md), and the bundled BSD-3-Clause text itself is stored in [`licenses/SciPy_LICENSE.txt`](./licenses/SciPy_LICENSE.txt).
 
 ## License
-Released under the MIT License. See [LICENSE](./LICENSE) for details.
+Released under the MIT License alongside the third-party terms noted above. See [LICENSE](./LICENSE) and [THIRD_PARTY_LICENSES.md](./THIRD_PARTY_LICENSES.md) for details.
