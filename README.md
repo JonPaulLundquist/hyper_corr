@@ -20,7 +20,7 @@ pip install scipy
 # optional for fast math optimizations on Intel CPUs
 pip install icc_rt
 
-#Install hyper-corr from pip
+#Install hyper-corr from pypi with pip
 pip install hyper-corr
 
 # or local install from source
