@@ -94,7 +94,7 @@ for i in range(M):
     pvals[i] = p
 ```
 
-##Notes
+## Notes
 - Data should be pre-cleaned. Sample data is not checked for real values or the fact that correlations must have n>2. nan is not taken into account. Speed was considered to be of the utmost importance.
 - For the *_tie/_notie functions x MUST be sorted and y MUST be ordered by that sort.
 - *_tie/_notie functions output stat and pvalue not SciPy return types as they are incompatible with Numba.
