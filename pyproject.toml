@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hyper_corr"
-version = "0.1.1"
+version = "0.2.1"
 description = "Hyper-Fast Correlation Functions (Numba-Accelerated): Pearson's r, Spearman's rho, Kendall's tau, Chatterjee's xi, Somers’ D"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.8"
 license = "MIT"
-license-files = ["*LICENSE*"]
+license-files = ["*LICENSE*", "licenses/*"]
 authors = [{ name = "Jon Paul Lundquist" }]
 keywords = ["statistics", "correlation", "ranked", "pearson", "spearman",  "kendall", "chatterjee", "somers", "numba"]
 classifiers = [                                                                                                                                                                      "Programming Language :: Python :: 3",
@@ -23,8 +23,9 @@ Homepage = "https://github.com/JonPaulLundquist/hyper_corr"
 Issues = "https://github.com/JonPaulLundquist/hyper_corr/issues"
 
 [tool.setuptools.packages.find]
-include = ["hyper_corr*"]
+include = ["hyper_corr"]
 exclude = ["*tests*", "*bench*", "*examples*"]
 
 [tool.setuptools.package-data]
-hyper_corr = ["data/kendall_pvals.npy"]
+hyper_corr = ["data/*.npy"]
+
