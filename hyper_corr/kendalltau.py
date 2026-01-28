@@ -581,7 +581,7 @@ def _kendalltau_ties_unsorted(x, y, n, idx=None, pvals=True):
 
     x_max  = int(x_rank[-1])
     # y ranks, equal y share the same rank
-    y_ordered = np.empty(n, np.float64)
+    y_ordered = np.empty(n, dtype=y.dtype)
     for i in range(n):
         y_ordered[i] = y[idx[i]]
     y_rank, y_max = _ranks(y_ordered, n)
@@ -621,7 +621,7 @@ def kendalltau_noties(x_sorted, y_ordered, n, pvals=True):
         x = x[ind]
     """
     
-    buf = np.empty(n, np.float64)
+    buf = np.empty(n, dtype=y_ordered.dtype)
     dis = _dis_mergestable(y_ordered, buf, n)
     
     m = n * (n - 1.)
@@ -648,7 +648,7 @@ def _kendalltau_noties_unsorted(x, y, n, idx=None, pvals=True):
     if idx is None:
         idx = _argsort(x, n)  
         
-    y_ordered = np.empty(n, np.float64)
+    y_ordered = np.empty(n, dtype=y.dtype)
     for i in range(n):
         y_ordered[i] = y[idx[i]]
 
